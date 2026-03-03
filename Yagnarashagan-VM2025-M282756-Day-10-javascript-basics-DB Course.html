@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript DOM Basics</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f6f8;
+      }
+
+      h2 {
+        color: #333;
+      }
+
+      .box {
+        padding: 10px;
+        margin: 10px 0;
+        background-color: white;
+        border: 1px solid #ccc;
+      }
+
+      .highlight {
+        color: white;
+        background-color: green;
+        padding: 5px;
+      }
+
+      button {
+        padding: 8px 15px;
+        margin-top: 5px;
+        cursor: pointer;
+      }
+      navbar a.active {
+        background-color: red;
+      }
+      /* Mobile Responsive Styles */
+      @media (max-width: 600px) {
+        body {
+          padding: 10px;
+          font-size: 16px;
+        }
+
+        h1 {
+          font-size: 22px;
+          text-align: center;
+        }
+
+        h2 {
+          font-size: 18px;
+        }
+
+        .box {
+          padding: 12px;
+          margin: 8px 0;
+          border-radius: 6px;
+        }
+
+        nav.navbar {
+          display: flex;
+          flex-direction: column;
+          gap: 8px;
+          margin-bottom: 15px;
+        }
+
+        nav.navbar a {
+          display: block;
+          text-align: center;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          background-color: #fff;
+        }
+
+        nav.navbar a.active {
+          background-color: red;
+          color: white;
+        }
+
+        input[type="text"] {
+          width: 100%;
+          padding: 8px;
+          margin-bottom: 8px;
+          box-sizing: border-box;
+        }
+
+        button {
+          width: 100%;
+          padding: 10px;
+          font-size: 16px;
+        }
+
+        p {
+          font-size: 15px;
+          line-height: 1.4;
+        }
+      }
+    </style>
+  </head>
+  <link rel="stylesheet" href="../day11/cricket/style.css" />
+  <body>
+    <h1>CSS & JavaScript Tutorial</h1>
+    <nav class="navbar">
+      <a href="../day11/cricket/index.html">animation</a>
+      <a href="/day10/transition.html">2D Transitions</a>
+      <a href="/day12/index.html" class="active">javascript</a>
+      <a href="/day12/images.html">images</a>
+    </nav>
+    <h1>JavaScript for Web Development</h1>
+
+    <!-- 1. getElementById -->
+    <div class="box">
+      <h2 id="title">Hello World</h2>
+      <button onclick="changeText()">Change Text</button>
+    </div>
+
+    <!-- 2. Input value -->
+    <div class="box">
+      <input type="text" id="username" placeholder="Enter your name" />
+      <button onclick="showName()">Show Name</button>
+      <p id="output"></p>
+    </div>
+
+    <!-- 3. Style change -->
+    <div class="box">
+      <p id="colorText">Change my color</p>
+      <button onclick="changeColor()">Change Color</button>
+    </div>
+
+    <!-- 4. classList -->
+    <div class="box">
+      <p id="classText">Add class using JavaScript</p>
+      <button onclick="addClass()">Add Class</button>
+    </div>
+
+    <!-- 5. querySelector -->
+    <div class="box">
+      <p class="msg">First Message</p>
+      <p class="msg">Second Message</p>
+      <button onclick="selectOne()">Select First</button>
+    </div>
+
+    <!-- 6. addEventListener -->
+    <div class="box">
+      <button id="eventBtn">Click Me</button>
+      <p id="eventResult"></p>
+    </div>
+
+    <script>
+      // 1. getElementById
+      function changeText() {
+        document.getElementById("title").innerText = "Text Changed!";
+      }
+
+      // 2. value property
+      function showName() {
+        let name = document.getElementById("username").value;
+        document.getElementById("output").innerText = `Hello ${name}`;
+      }
+
+      // 3. style property
+      function changeColor() {
+        document.getElementById("colorText").style.color = "red";
+      }
+
+      // 4. classList
+      function addClass() {
+        document.getElementById("classText").classList.add("highlight");
+      }
+
+      // 5. querySelector
+      function selectOne() {
+        document.querySelector(".msg").style.color = "blue";
+      }
+
+      // 6. addEventListener
+      document
+        .getElementById("eventBtn")
+        .addEventListener("click", function () {
+          document.getElementById("eventResult").innerText =
+            "Button clicked using addEventListener!";
+        });
+    </script>
+  </body>
+</html>

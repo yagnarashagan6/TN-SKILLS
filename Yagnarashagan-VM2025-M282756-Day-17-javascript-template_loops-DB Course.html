@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Template Strings and Loops</title>
+  </head>
+  <body>
+    <h1>Open console to see outputs</h1>
+    <script>
+      // Template Strings
+      const name = "Alice";
+      const age = 25;
+      const message = `Hello, my name is ${name} and I am ${age} years old.`;
+      console.log("Template String:", message);
+
+      // forEach
+      const numbers = [10, 20, 30, 40];
+      console.log("forEach:");
+      numbers.forEach((num, index) => {
+        console.log("Index:", index, "Value:", num);
+      });
+
+      // for...in
+      const student = {
+        name: "Alice",
+        age: 21,
+        grade: "A",
+      };
+      console.log("for...in:");
+      for (let key in student) {
+        console.log("Key:", key, "Value:", student[key]);
+      }
+
+      // for...of
+      console.log("for...of:");
+      for (let num of numbers) {
+        console.log("Value:", num);
+      }
+    </script>
+  </body>
+</html>

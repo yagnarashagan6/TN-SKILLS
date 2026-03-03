@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Media Query Demo with Explanations</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background: #f4f4f4;
+        transition:
+          background 0.5s,
+          color 0.5s;
+      }
+
+      .status {
+        background: #222;
+        color: #fff;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 6px;
+        text-align: center;
+        font-weight: bold;
+      }
+
+      .container {
+        max-width: 900px;
+        margin: auto;
+        background: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .media-selector {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+      }
+
+      .media-option {
+        background: #0078d7;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+        border-radius: 6px;
+        cursor: pointer;
+        transition:
+          background 0.3s,
+          transform 0.3s;
+      }
+
+      .media-option:hover {
+        background: #005a9e;
+        transform: scale(1.05);
+      }
+
+      /* Layout changes */
+      @media (max-width: 600px) {
+        .media-selector {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @media (min-width: 601px) and (max-width: 900px) {
+        .media-selector {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      @media (min-width: 901px) {
+        .media-selector {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+
+      /* Orientation */
+      @media (orientation: portrait) {
+        body {
+          border-left: 10px solid #0078d7;
+        }
+      }
+      @media (orientation: landscape) {
+        body {
+          border-top: 10px solid #0078d7;
+        }
+      }
+
+      /* Dark mode */
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: #111;
+          color: #eee;
+        }
+        .container {
+          background: #222;
+        }
+        .media-option {
+          background: #444;
+        }
+      }
+
+      /* Reduced motion */
+      @media (prefers-reduced-motion: reduce) {
+        .media-option {
+          transition: none;
+        }
+      }
+
+      /* Hover capability */
+      @media (hover: none) {
+        .media-option:hover {
+          transform: none;
+          background: #0078d7;
+        }
+      }
+
+      /* Pointer type */
+      @media (pointer: coarse) {
+        .media-option {
+          font-size: 18px;
+          padding: 25px;
+        }
+      }
+
+      /* Aspect ratio */
+      @media (min-aspect-ratio: 3/2) {
+        body {
+          background: #e0ffe0;
+        }
+      }
+
+      /* High DPI */
+      @media (min-resolution: 2dppx) {
+        h1::after {
+          content: " (High DPI)";
+          font-size: 14px;
+          color: #0078d7;
+        }
+      }
+
+      /* Color depth */
+      @media (min-color: 8) {
+        .media-option {
+          border: 2px solid #ff4081;
+        }
+      }
+
+      /* Monochrome */
+      @media (monochrome) {
+        body {
+          background: #fff;
+          color: #000;
+        }
+        .media-option {
+          background: #ccc;
+          color: #000;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="status" id="status">Active Media Query:</div>
+    <div class="container">
+      <h1>Media Selector</h1>
+      <div class="media-selector">
+        <div class="media-option">📷 Image</div>
+        <div class="media-option">🎥 Video</div>
+        <div class="media-option">🎵 Audio</div>
+        <div class="media-option">📄 Document</div>
+        <div class="media-option">🖼 Gallery</div>
+        <div class="media-option">📂 File</div>
+        <div class="media-option">🌐 Link</div>
+        <div class="media-option">🔗 Embed</div>
+      </div>
+    </div>
+
+    <script>
+      const status = document.getElementById("status");
+
+      function updateStatus() {
+        let messages = [];
+
+        if (window.matchMedia("(max-width: 600px)").matches) {
+          messages.push("Mobile layout (≤600px)");
+        } else if (
+          window.matchMedia("(min-width: 601px) and (max-width: 900px)").matches
+        ) {
+          messages.push("Tablet layout (601–900px)");
+        } else if (window.matchMedia("(min-width: 901px)").matches) {
+          messages.push("Desktop layout (≥901px)");
+        }
+
+        if (window.matchMedia("(orientation: portrait)").matches) {
+          messages.push("Portrait orientation");
+        }
+        if (window.matchMedia("(orientation: landscape)").matches) {
+          messages.push("Landscape orientation");
+        }
+
+        if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+          messages.push("Dark mode preference");
+        }
+
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          messages.push("Reduced motion preference");
+        }
+
+        if (window.matchMedia("(hover: none)").matches) {
+          messages.push("No hover support (touch device)");
+        }
+
+        if (window.matchMedia("(pointer: coarse)").matches) {
+          messages.push("Coarse pointer (finger/touch)");
+        }
+
+        if (window.matchMedia("(min-aspect-ratio: 3/2)").matches) {
+          messages.push("Aspect ratio ≥ 3:2");
+        }
+
+        if (window.matchMedia("(min-resolution: 2dppx)").matches) {
+          messages.push("High DPI / Retina display");
+        }
+
+        if (window.matchMedia("(min-color: 8)").matches) {
+          messages.push("Color depth ≥ 8 bits");
+        }
+
+        if (window.matchMedia("(monochrome)").matches) {
+          messages.push("Monochrome display");
+        }
+
+        status.textContent = "Active Media Query: " + messages.join(" | ");
+      }
+
+      // Run on load and whenever window resizes
+      updateStatus();
+      window.addEventListener("resize", updateStatus);
+    </script>
+  </body>
+</html>

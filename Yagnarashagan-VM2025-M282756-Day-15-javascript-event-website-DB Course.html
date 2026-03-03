@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TechNova 2026 | College Tech Fest</title>
+    <style>
+      /* --- General Reset & Typography --- */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      html {
+        scroll-behavior: smooth; /* Requirement 10: Smooth scrolling */
+      }
+
+      body {
+        background-color: #f4f7f6;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      /* --- Requirement 1: Navigation Bar --- */
+      nav {
+        background-color: #2c3e50;
+        padding: 1rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      nav ul {
+        text-align: center;
+        list-style-type: none; /* Remove bullets */
+      }
+
+      nav ul li {
+        display: inline-block; /* Display inline-block */
+        margin: 0 15px;
+      }
+
+      nav ul li a {
+        text-decoration: none;
+        color: #ecf0f1; /* Light text */
+        font-size: 1.1rem;
+        font-weight: 600;
+        padding: 8px 16px;
+        transition:
+          color 0.3s ease,
+          background-color 0.3s ease;
+        border-radius: 4px;
+      }
+
+      nav ul li a:hover {
+        color: #fff;
+        background-color: #e74c3c; /* Hover color change */
+      }
+
+      /* --- Requirement 2: Hero Section --- */
+      #home {
+        /* Background image with overlay for contrast */
+        background:
+          linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+          url("https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80");
+        background-size: cover;
+        background-position: center;
+        height: 93vh; /* Set height */
+        display: flex; /* Flexbox centering */
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: white; /* Contrast text */
+      }
+
+      #home h1 {
+        font-size: 3.5rem;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      #home p {
+        font-size: 1.5rem;
+        max-width: 600px;
+      }
+
+      /* --- Requirement 3: Event Features Section --- */
+      #events {
+        padding: 4rem 2rem;
+        background-color: #fff;
+        height: 710px;
+        align-content: center;
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 3rem;
+        font-size: 2.5rem;
+        color: #2c3e50;
+      }
+
+      .features-container {
+        display: flex;
+        justify-content: space-between; /* Equal spacing */
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .feature-box {
+        flex: 1;
+        background: #fff;
+        border: 1px solid #e0e0e0;
+        padding: 2rem;
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        transition: transform 0.3s ease;
+      }
+
+      /* Combinator usage: Direct child selector */
+      .features-container > .feature-box:hover {
+        transform: translateY(-10px);
+      }
+
+      .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        display: block;
+      }
+
+      /* --- Requirement 4: Image Gallery --- */
+      #gallery {
+        padding: 4rem 2rem;
+        background-color: #f4f7f6;
+      }
+
+      .gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* 3 Columns */
+        gap: 15px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: 250px; /* Fixed height */
+        object-fit: cover; /* Cover */
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: opacity 0.3s;
+      }
+
+      /* Requirement 8: Opacity usage */
+      .gallery-item img:hover {
+        opacity: 0.8;
+        cursor: pointer;
+      }
+
+      /* --- Requirement 5: Registration Table --- */
+      #schedule {
+        padding: 4rem 2rem;
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 710px;
+      }
+
+      table {
+        width: 100%;
+        max-width: 900px;
+        border-collapse: collapse;
+        margin-top: 1rem;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+      }
+
+      th,
+      td {
+        padding: 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd; /* Borders */
+      }
+
+      th {
+        background-color: #2c3e50;
+        color: white;
+        font-weight: 600;
+      }
+
+      /* Row hover effect */
+      tr:hover {
+        background-color: #f1f1f1;
+      }
+
+      /* --- Requirement 6: Register Button with Animation --- */
+      #register-cta {
+        padding: 10rem 2rem;
+        text-align: center;
+        background-color: #e8ecf1;
+      }
+
+      .btn-register {
+        display: inline-block;
+        padding: 15px 40px;
+        font-size: 1.2rem;
+        color: white;
+        background-color: #e74c3c;
+        border: none;
+        border-radius: 50px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        /* Simple Animation */
+        animation: pulse 2s infinite;
+      }
+
+      .btn-register:hover {
+        background-color: #c0392b; /* Color change */
+        transform: scale(1.1); /* Scale transform */
+      }
+
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 10px rgba(231, 76, 60, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(231, 76, 60, 0);
+        }
+      }
+
+      /* --- Requirement 7: Footer --- */
+      footer {
+        background-color: #2c3e50;
+        color: #ecf0f1;
+        text-align: center;
+        padding: 2rem;
+        margin-top: auto;
+      }
+
+      /* --- Requirement 8: Position + Extra --- */
+      #help-btn {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        cursor: pointer;
+        z-index: 1001;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.2s;
+      }
+
+      #help-btn:hover {
+        transform: translateY(-5px);
+      }
+
+      /* Modal Styles (for interactivity) */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 2000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal-content {
+        background-color: #fefefe;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 400px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      }
+
+      .close-modal {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+
+      .close-modal:hover {
+        color: black;
+      }
+
+      /* --- Requirement 9: Responsive Design --- */
+      @media screen and (max-width: 768px) {
+        /* Navigation vertical stack */
+        nav ul li {
+          display: block;
+          margin: 10px 0;
+        }
+
+        /* Features stack vertically */
+        .features-container {
+          flex-direction: column;
+        }
+
+        /* Gallery becomes 1 column */
+        .gallery-grid {
+          grid-template-columns: 1fr;
+        }
+
+        /* Table adjustment for small screens */
+        th,
+        td {
+          padding: 10px 5px;
+          font-size: 0.9rem;
+        }
+
+        #home h1 {
+          font-size: 2.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Requirement 1: Navigation -->
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#schedule">Schedule</a></li>
+        <li><a href="#register-cta">Register</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Requirement 2: Hero Section -->
+    <header id="home">
+      <h1>TechNova 2026</h1>
+      <p>Innovate. Integrate. Inspire. Join the future of technology.</p>
+    </header>
+
+    <!-- Requirement 3: Event Features (Flexbox) -->
+    <section id="events">
+      <h2 class="section-title">Event Highlights</h2>
+      <div class="features-container">
+        <!-- Box 1 -->
+        <div class="feature-box">
+          <span class="feature-icon">💻</span>
+          <h3>Coding Contest</h3>
+          <p>
+            Battle it out in our 24-hour hackathon. Solve complex algorithms and
+            build functional apps.
+          </p>
+        </div>
+        <!-- Box 2 -->
+        <div class="feature-box">
+          <span class="feature-icon">🤖</span>
+          <h3>Robotics Show</h3>
+          <p>
+            Witness autonomous bots in action. Sumo battles, maze solvers, and
+            drone racing.
+          </p>
+        </div>
+        <!-- Box 3 -->
+        <div class="feature-box">
+          <span class="feature-icon">🧠</span>
+          <h3>AI Workshop</h3>
+          <p>
+            Hands-on session on Machine Learning and Neural Networks with
+            industry experts.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Requirement 4: Image Gallery (Grid) -->
+    <section id="gallery">
+      <h2 class="section-title">Previous Editions</h2>
+      <div class="gallery-grid">
+        <div class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=600&q=80"
+            alt="Tech Conference"
+          />
+        </div>
+        <div class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?q=80&w=1169&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="Coding"
+          />
+        </div>
+        <div class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=600&q=80"
+            alt="Robotics"
+          />
+        </div>
+        <div class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=600&q=80"
+            alt="Group Discussion"
+          />
+        </div>
+        <div class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80"
+            alt="Cyber Security"
+          />
+        </div>
+        <div class="gallery-item">
+          <img
+            src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=600&q=80"
+            alt="Team Work"
+          />
+        </div>
+      </div>
+    </section>
+
+    <!-- Requirement 5: Registration Table -->
+    <section id="schedule">
+      <h2 class="section-title">Event Schedule</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Event Name</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Venue</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Opening Ceremony</td>
+            <td>March 15</td>
+            <td>09:00 AM</td>
+            <td>Main Auditorium</td>
+          </tr>
+          <tr>
+            <td>CodeWarz Hackathon</td>
+            <td>March 15</td>
+            <td>11:00 AM</td>
+            <td>Lab Complex A</td>
+          </tr>
+          <tr>
+            <td>Robo-Soccer</td>
+            <td>March 16</td>
+            <td>10:00 AM</td>
+            <td>Open Ground</td>
+          </tr>
+          <tr>
+            <td>AI Summit</td>
+            <td>March 16</td>
+            <td>02:00 PM</td>
+            <td>Seminar Hall 1</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Requirement 6: Register Button with Animation -->
+    <section id="register-cta">
+      <h2 class="section-title">Ready to Participate?</h2>
+      <p style="margin-bottom: 20px; font-size: 1.1rem">
+        Secure your spot now before tickets run out!
+      </p>
+      <button id="registerBtn" class="btn-register">Register Now</button>
+    </section>
+
+    <!-- Requirement 7: Footer -->
+    <footer id="contact">
+      <h3>Contact Us</h3>
+      <p>
+        <a
+          style="text-decoration: none; color: inherit"
+          href="mailto:contact@technova2026.edu"
+          >Email: contact@technova2026.edu</a
+        >
+        |
+        <a style="text-decoration: none; color: inherit" href="tel:+1234567890"
+          >Phone: 234 567 890</a
+        >
+      </p>
+      <p>Agni College Of Technology , Chennai.</p>
+      <p style="margin-top: 10px; font-size: 0.8rem">
+        &copy; 2026 TechNova Events. All Rights Reserved.
+      </p>
+    </footer>
+
+    <!-- Requirement 8: Fixed Help Button -->
+    <button id="help-btn" onclick="toggleHelp()">Help</button>
+
+    <!-- Custom Modal for Interactivity -->
+    <div id="registerModal" class="modal">
+      <div class="modal-content">
+        <span class="close-modal">&times;</span>
+        <h2 style="color: #2c3e50; margin-bottom: 10px">Registration Open!</h2>
+        <p>Thank you for your interest in TechNova 2026.</p>
+        <p>You will be redirected to the official portal shortly.</p>
+        <button
+          class="btn-register"
+          style="margin-top: 15px; font-size: 1rem; padding: 10px 20px"
+        >
+          Proceed
+        </button>
+      </div>
+    </div>
+
+    <script>
+      // Requirement 10: Basic JavaScript for interactivity
+
+      // 1. Modal Logic for Register Button
+      const modal = document.getElementById("registerModal");
+      const btn = document.getElementById("registerBtn");
+      const span = document.getElementsByClassName("close-modal")[0];
+
+      btn.onclick = function () {
+        modal.style.display = "flex"; // Show modal using Flex to center
+      };
+
+      span.onclick = function () {
+        modal.style.display = "none";
+      };
+
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+
+      // 2. Help Button Logic
+      function toggleHelp() {
+        const userResponse = confirm(
+          "Need assistance? Click OK to email support.",
+        );
+        if (userResponse) {
+          window.location.href = "mailto:support@technova.edu";
+        }
+      }
+
+      // 3. Smooth scrolling offset fix for sticky nav (optional enhancement)
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const targetId = this.getAttribute("href");
+          const targetElement = document.querySelector(targetId);
+
+          if (targetElement) {
+            const headerOffset = 60;
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition =
+              elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: "smooth",
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Validated Registration Form</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: linear-gradient(135deg, #74ebd5 0%, #9face6 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      form {
+        background: #fff;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        width: 350px;
+      }
+
+      h2 {
+        text-align: center;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      label {
+        display: block;
+        margin-top: 12px;
+        font-weight: bold;
+        color: #444;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        margin-top: 6px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 14px;
+        transition: border-color 0.3s;
+      }
+
+      input:focus {
+        border-color: #007bff;
+        outline: none;
+      }
+
+      .error {
+        color: red;
+        font-size: 13px;
+        margin-top: 4px;
+      }
+
+      button {
+        margin-top: 20px;
+        width: 100%;
+        padding: 12px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      button:hover {
+        background: #0056b3;
+      }
+
+      .success {
+        color: green;
+        text-align: center;
+        margin-top: 15px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="registerForm">
+      <h2>Register</h2>
+
+      <label for="name">Name:</label>
+      <input type="text" id="name" placeholder="Enter your name" />
+      <div id="nameError" class="error"></div>
+
+      <label for="email">Email:</label>
+      <input type="text" id="email" placeholder="Enter your email" />
+      <div id="emailError" class="error"></div>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" placeholder="Enter your password" />
+      <div id="passwordError" class="error"></div>
+
+      <button type="submit">Submit</button>
+      <div id="successMessage" class="success"></div>
+    </form>
+
+    <script>
+      document
+        .getElementById("registerForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          // Get values
+          let name = document.getElementById("name").value.trim();
+          let email = document.getElementById("email").value.trim();
+          let password = document.getElementById("password").value.trim();
+
+          // Error elements
+          let nameError = document.getElementById("nameError");
+          let emailError = document.getElementById("emailError");
+          let passwordError = document.getElementById("passwordError");
+          let successMessage = document.getElementById("successMessage");
+
+          // Reset messages
+          nameError.textContent = "";
+          emailError.textContent = "";
+          passwordError.textContent = "";
+          successMessage.textContent = "";
+
+          let valid = true;
+
+          // Name validation
+          if (name.length < 3 || name.length > 20) {
+            nameError.textContent = "Name must be between 3 and 20 characters.";
+            valid = false;
+          }
+
+          // Email validation
+          let emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,}$/i;
+          if (!email.match(emailPattern)) {
+            emailError.textContent = "Please enter a valid email address.";
+            valid = false;
+          }
+
+          // Password validation
+          let passwordPattern =
+            /^(?=.*[0-9])(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/;
+          if (!password.match(passwordPattern)) {
+            passwordError.textContent =
+              "Password must be at least 8 characters, include one number and one special character.";
+            valid = false;
+          }
+
+          // Success
+          if (valid) {
+            successMessage.textContent = "Form submitted successfully!";
+          }
+        });
+    </script>
+  </body>
+</html>

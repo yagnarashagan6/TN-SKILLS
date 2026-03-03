@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>CSS Display Properties Assignment</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f6f8;
+        padding: 20px;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      h2 {
+        margin-top: 40px;
+        color: #333;
+      }
+
+      .section {
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Common box style */
+      .box {
+        width: 80px;
+        height: 80px;
+        background-color: #4caf50;
+        color: white;
+        text-align: center;
+        line-height: 80px;
+        margin: 5px;
+        border-radius: 6px;
+        font-weight: bold;
+      }
+
+      /* BLOCK */
+      .block-example .box {
+        display: block;
+      }
+
+      /* INLINE */
+      .inline-example .box {
+        display: inline;
+        width: auto;
+        height: auto;
+        padding: 10px;
+        line-height: normal;
+      }
+
+      /* INLINE-BLOCK */
+      .inline-block-example .box {
+        display: inline-block;
+      }
+
+      /* FLEX */
+      .flex-example {
+        display: flex;
+        gap: 10px;
+      }
+
+      /* GRID */
+      .grid-example {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+
+      /* INLINE-GRID */
+      .inline-grid-example {
+        display: inline-grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+
+      /* NONE */
+      .none-example .box {
+        display: none;
+      }
+
+      /* CONTENTS */
+      .contents-example {
+        display: contents;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>CSS Display Properties – Assignment</h1>
+
+    <!-- BLOCK -->
+    <div class="section block-example">
+      <h2>display: block</h2>
+      <p>Each box takes full width and appears on a new line.</p>
+      <div class="box">1</div>
+      <div class="box">2</div>
+      <div class="box">3</div>
+    </div>
+
+    <!-- INLINE -->
+    <div class="section inline-example">
+      <h2>display: inline</h2>
+      <p>Boxes stay in the same line. Width & height are ignored.</p>
+      <span class="box">A</span>
+      <span class="box">B</span>
+      <span class="box">C</span>
+    </div>
+
+    <!-- INLINE-BLOCK -->
+    <div class="section inline-block-example">
+      <h2>display: inline-block</h2>
+      <p>Same line + width and height works.</p>
+      <div class="box">1</div>
+      <div class="box">2</div>
+      <div class="box">3</div>
+    </div>
+
+    <!-- FLEX -->
+    <div class="section">
+      <h2>display: flex</h2>
+      <p>Flexible layout with easy alignment.</p>
+      <div class="flex-example">
+        <div class="box">F1</div>
+        <div class="box">F2</div>
+        <div class="box">F3</div>
+      </div>
+    </div>
+
+    <!-- GRID -->
+    <div class="section">
+      <h2>display: grid</h2>
+      <p>Row and column based layout.</p>
+      <div class="grid-example">
+        <div class="box">G1</div>
+        <div class="box">G2</div>
+        <div class="box">G3</div>
+        <div class="box">G4</div>
+        <div class="box">G5</div>
+        <div class="box">G6</div>
+      </div>
+    </div>
+
+    <!-- INLINE GRID -->
+    <div class="section">
+      <h2>display: inline-grid</h2>
+      <p>Grid behaves like inline element.</p>
+      <div class="inline-grid-example">
+        <div class="box">IG1</div>
+        <div class="box">IG2</div>
+        <div class="box">IG3</div>
+        <div class="box">IG4</div>
+      </div>
+    </div>
+
+    <!-- NONE -->
+    <div class="section none-example">
+      <h2>display: none</h2>
+      <p>Element is completely removed from the page.</p>
+      <div class="box">Hidden</div>
+      <p>(Box is not visible)</p>
+    </div>
+
+    <!-- CONTENTS -->
+    <div class="section">
+      <h2>display: contents</h2>
+      <p>Parent disappears, children remain.</p>
+      <div class="contents-example">
+        <div class="box">C1</div>
+        <div class="box">C2</div>
+        <div class="box">C3</div>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Async Await, Callback, Promise, Try Catch</title>
+  </head>
+  <body>
+    <h1>Open console to see outputs</h1>
+    <script>
+      // Async Await
+      async function getUsers() {
+        try {
+          let response = await fetch(
+            "https://jsonplaceholder.typicode.com/users",
+          );
+          let data = await response.json();
+          console.log("Async Await - Users:", data.slice(0, 2)); // Log first 2 for brevity
+        } catch (error) {
+          console.log("Async Await - Error:", error);
+        }
+      }
+      getUsers();
+
+      // Callback
+      function makeTea(callback) {
+        console.log("Callback - Tea preparation started...");
+        setTimeout(function () {
+          console.log("Callback - Tea ready!");
+          callback();
+        }, 2000);
+      }
+      function drinkTea() {
+        console.log("Callback - Drinking tea ☕");
+      }
+      makeTea(drinkTea);
+
+      // Promise
+      let teaPromise = new Promise(function (resolve, reject) {
+        let teaReady = true; // Change to false to see reject
+        if (teaReady) {
+          resolve("Promise - Tea ready da ☕");
+        } else {
+          reject("Promise - Tea illa da 😢");
+        }
+      });
+      teaPromise
+        .then(function (result) {
+          console.log(result);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+
+      // Try Catch
+      try {
+        let number = 10;
+        console.log("Try Catch - Number:", number.toUpperCase()); // This will error
+      } catch (error) {
+        console.log("Try Catch - Error caught:", error.message);
+      } finally {
+        console.log("Try Catch - Finally block executed");
+      }
+    </script>
+  </body>
+</html>

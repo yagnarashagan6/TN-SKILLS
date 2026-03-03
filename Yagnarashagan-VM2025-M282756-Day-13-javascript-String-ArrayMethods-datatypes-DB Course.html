@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Array Methods Demo</title>
+  </head>
+  <body>
+    <h2>Array Values Display</h2>
+    <ul id="arrayList"></ul>
+
+    <script>
+      // Initial array
+      let array1 = [45, "raj", "kumar"];
+      console.log("Initial array:", array1);
+
+      // Push and Pop
+      array1.push("56");
+      console.log("After push:", array1);
+      array1.pop();
+      console.log("After pop:", array1);
+
+      // Shift and Unshift
+      array1.shift();
+      console.log("After shift:", array1);
+      array1.unshift(65, "ravi");
+      console.log("After unshift:", array1);
+
+      // Splice
+      array1.splice(2, 1, "rajan");
+      console.log("After splice:", array1);
+
+      // Slice
+      let array2 = array1.slice(1, 3);
+      console.log("Slice result:", array2);
+
+      // Another array
+      let array3 = [1, 24, 5, 23, 41, 15];
+
+      // Sort and Reverse
+      console.log(
+        "Sorted array3:",
+        array3.sort((a, b) => a - b),
+      );
+      console.log("Reversed array3:", array3.reverse());
+
+      // Fill, Join, ToString
+      let array4 = ["cat", "apple", "Ant", "Bat", "dog", 56];
+      console.log("Sorted array4:", array4.sort());
+      console.log("Joined array4:", array4.join("-"));
+      console.log("ToString array4:", array4.toString());
+
+      let array6 = array4.fill("hai", 3, 5);
+      console.log("Filled array4:", array6);
+
+      // Concat
+      let array7 = array3.concat(array6, array4);
+      console.log("Concatenated array7:", array7);
+
+      // IndexOf and Includes
+      console.log("IndexOf 'hai':", array7.indexOf("hai"));
+      console.log("Includes 'Bat':", array7.includes("Bat"));
+
+      // forEach
+      let total = 0;
+      array3.forEach(function (value) {
+        total += value;
+      });
+      console.log("Sum using forEach:", total);
+
+      // Map
+      let mapped = array3.map(function (value) {
+        return value * 10;
+      });
+      console.log("Mapped array:", mapped);
+
+      // Filter
+      let filtered = array3.filter(function (value) {
+        return value > 20;
+      });
+      console.log("Filtered array (>20):", filtered);
+
+      // Some
+      let someResult = array3.some(function (value) {
+        return value > 20;
+      });
+      console.log("Some >20:", someResult);
+
+      // Reduce
+      let reduced = array3.reduce(function (sum, value) {
+        return sum + value;
+      }, 0);
+      console.log("Reduced sum:", reduced);
+
+      // Keys
+      let arrayKeys = array3.keys();
+      console.log("Array keys:");
+      for (let key of arrayKeys) {
+        console.log(key);
+      }
+
+      // Object keys
+      const obj = {
+        roll: 45,
+        student_name: "rajan",
+        student_lastname: "kumar",
+      };
+      let objKeys = Object.keys(obj);
+      console.log("Object keys:");
+      objKeys.forEach(function (key) {
+        console.log(key);
+      });
+
+      // Display array values in list using forEach
+      let list = document.getElementById("arrayList");
+      array3.forEach(function (value) {
+        let li = document.createElement("li");
+        li.textContent = value;
+        list.appendChild(li);
+      });
+    </script>
+  </body>
+</html>

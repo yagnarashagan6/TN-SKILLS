@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Table from Fetch (async/await)</title>
+    <style>
+      body {
+        font-family: system-ui, Arial;
+        padding: 1.25rem;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 0.5rem;
+        text-align: left;
+      }
+      th {
+        background: #f4f6f8;
+      }
+      #loader {
+        margin-top: 1rem;
+        color: #555;
+      }
+      #controls {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+      }
+      #error {
+        color: #a00;
+        margin-top: 0.75rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Populate Table using fetch + async/await</h1>
+
+    <p>
+      This demo fetches JSON from an external URL and inserts rows into a table.
+    </p>
+
+    <div id="controls">
+      <button id="load">Load Users</button>
+      <button id="reload" disabled>Reload</button>
+      <span id="loader" aria-live="polite"></span>
+    </div>
+
+    <div id="error" role="alert" aria-atomic="true"></div>
+
+    <table id="dataTable">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Company</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- rows inserted here -->
+      </tbody>
+    </table>
+
+    <script>
+      // URL providing sample JSON (CORS-enabled)
+      const DATA_URL = "https://jsonplaceholder.typicode.com/users";
+
+      const loadBtn = document.getElementById("load");
+      const reloadBtn = document.getElementById("reload");
+      const loader = document.getElementById("loader");
+      const errorEl = document.getElementById("error");
+      const tbody = document.querySelector("#dataTable tbody");
+
+      // Populate table rows from an array of objects
+      function renderRows(items) {
+        tbody.innerHTML = ""; // clear existing
+        for (const item of items) {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+						<td>${item.id}</td>
+						<td>${escapeHtml(item.name)}</td>
+						<td>${escapeHtml(item.username)}</td>
+						<td>${escapeHtml(item.email)}</td>
+						<td>${escapeHtml(item.company?.name || "")}</td>
+					`;
+          tbody.appendChild(tr);
+        }
+      }
+
+      // Minimal HTML escape helper
+      function escapeHtml(str) {
+        return String(str)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+
+      // Async function to fetch data with proper error handling
+      async function fetchData(url) {
+        loader.textContent = "Loading...";
+        errorEl.textContent = "";
+        loadBtn.disabled = true;
+        try {
+          const resp = await fetch(url);
+          if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+          const data = await resp.json();
+          // assume data is an array
+          renderRows(Array.isArray(data) ? data : [data]);
+          reloadBtn.disabled = false;
+        } catch (err) {
+          console.error("Fetch failed", err);
+          errorEl.textContent = "Failed to load data: " + err.message;
+        } finally {
+          loader.textContent = "";
+          loadBtn.disabled = false;
+        }
+      }
+
+      // Wire up buttons
+      loadBtn.addEventListener("click", () => fetchData(DATA_URL));
+      reloadBtn.addEventListener("click", () => fetchData(DATA_URL));
+
+      // Optionally auto-load on page open (commented out)
+      // fetchData(DATA_URL);
+    </script>
+  </body>
+</html>

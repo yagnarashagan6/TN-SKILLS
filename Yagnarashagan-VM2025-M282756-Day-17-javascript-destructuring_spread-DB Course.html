@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Destructuring and Spread Operator</title>
+  </head>
+  <body>
+    <h1>Open console to see outputs</h1>
+    <script>
+      // Destructuring in Array
+      const colors = ["red", "green", "blue"];
+      const [first, second, third] = colors;
+      console.log("Array Destructuring:");
+      console.log("First:", first, "Second:", second, "Third:", third);
+
+      // Destructuring in Object
+      const car = {
+        brand: "Tesla",
+        model: "Model 3",
+        price: 35000,
+      };
+      const { brand, model } = car;
+      console.log("Object Destructuring:");
+      console.log("Brand:", brand, "Model:", model);
+
+      // Spread Operator
+      const arr1 = [1, 2, 3];
+      const arr2 = [4, 5, 6];
+      const combined = [...arr1, ...arr2];
+      console.log("Spread Operator for Merging:");
+      console.log("Combined:", combined);
+
+      // Spread Operator for Copying Array
+      const original = [10, 20, 30];
+      const copy = [...original];
+      copy.push(40);
+      console.log("Spread Operator for Copying:");
+      console.log("Original:", original);
+      console.log("Copy after push:", copy);
+    </script>
+  </body>
+</html>

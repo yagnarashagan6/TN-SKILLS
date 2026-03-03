@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>String Methods & Loops — Examples</title>
+    <style>
+      body {
+        font-family:
+          system-ui,
+          -apple-system,
+          "Segoe UI",
+          Roboto,
+          Arial;
+        padding: 24px;
+      }
+      h1 {
+        margin-bottom: 8px;
+      }
+      .example {
+        margin: 12px 0;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        background: #f9f9f9;
+      }
+      .example pre {
+        margin: 6px 0 0;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+      .label {
+        font-weight: 600;
+        color: #0b5;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>String Methods & Loops — Examples ✅</h1>
+    <p>
+      Live examples showing many common string methods and both
+      <code>for...in</code> and <code>for...of</code> loops.
+    </p>
+
+    <div id="output"></div>
+
+    <script>
+      const out = document.getElementById("output");
+      function show(title, value) {
+        const el = document.createElement("div");
+        el.className = "example";
+        el.innerHTML = `<div class="label">${title}</div><pre>${value}</pre>`;
+        out.appendChild(el);
+        console.log(title, value);
+      }
+
+      // Basic string
+      const nameList = "Rajan, Kumar, Raj, Senthil, Ravi";
+      show("Original string", nameList);
+
+      // length
+      show("length", nameList.length);
+
+      // charAt, charCodeAt, at
+      show("charAt(6)", nameList.charAt(6));
+      show("charCodeAt(6)", nameList.charCodeAt(6));
+      show("at(-1) // last char", nameList.at(-1));
+
+      // slice, substring, substr (substr is deprecated but shown for legacy)
+      show("slice(7,12)", nameList.slice(7, 12));
+      show("substring(7,12)", nameList.substring(7, 12));
+      show("substr(7,5) (deprecated)", nameList.substr(7, 5));
+
+      // indexOf, lastIndexOf, includes, startsWith, endsWith
+      show('indexOf("Raj")', nameList.indexOf("Raj"));
+      show('indexOf("Kumar")', nameList.indexOf("Kumar"));
+      show('lastIndexOf("Raj")', nameList.lastIndexOf("Raj"));
+      show('includes("Senthil")', nameList.includes("Senthil"));
+      show('startsWith("Rajan")', nameList.startsWith("Rajan"));
+      show('endsWith("Ravi")', nameList.endsWith("Ravi"));
+
+      // trim, trimStart, trimEnd
+      const spaced = "   hello world   ";
+      show("trim", `'${spaced.trim()}'`);
+      show("trimStart", `'${spaced.trimStart()}'`);
+      show("trimEnd", `'${spaced.trimEnd()}'`);
+
+      // padStart, padEnd
+      show('padStart(12, "-")', "42".padStart(12, "-"));
+      show('padEnd(12, ".")', "42".padEnd(12, "."));
+
+      // toUpperCase, toLowerCase, normalize
+      const mixed = "jaVa ScRipT";
+      show("toUpperCase", mixed.toUpperCase());
+      show("toLowerCase", mixed.toLowerCase());
+      show("normalize", "café".normalize("NFD"));
+
+      // replace & replaceAll (regex example) — case-insensitive
+      const text = "Apple apple APPLE";
+      show("replace (first occurrence)", text.replace("Apple", "Orange"));
+      show("replaceAll (case-sensitive)", text.replaceAll("apple", "Orange"));
+      show(
+        "replace (regex, case-insensitive, global)",
+        text.replace(/apple/gi, "Orange"),
+      );
+
+      // split, join (via array), repeat
+      const csv = "red,green,blue";
+      const colors = csv.split(",");
+      show("split", JSON.stringify(colors));
+      show("join", colors.join(" | "));
+      show("repeat", "ha".repeat(3));
+
+      // concat, template literals
+      show("concat", "Hello".concat(", ", "world!"));
+      show(
+        "template literal",
+        `Name list has ${nameList.split(",").length} names`,
+      );
+
+      // search, match, matchAll
+      const poem = "Roses are red, violets are blue, sugar is sweet";
+      show('search("violets")', poem.search("violets"));
+      show("match(/are/g)", JSON.stringify(poem.match(/are/g)));
+
+      // localeCompare
+      show('localeCompare example ("a" vs "b")', "a".localeCompare("b"));
+
+      // valueOf & toString + typeof examples
+      show("valueOf", String.prototype.valueOf.call("abc"));
+      show("toString", String.prototype.toString.call("xyz"));
+      const num = 42;
+      const bool = true;
+      const undef = undefined;
+      show("typeof nameList", typeof nameList);
+      show("typeof num", typeof num);
+      show("typeof bool", typeof bool);
+      show("typeof undef", typeof undef);
+      show("typeof colors", typeof colors);
+      // Data types examples
+      const dtString = "hello";
+      const dtNumber = 3.14;
+      const dtBigInt = 9007199254740991n;
+      const dtBoolean = false;
+      const dtNull = null;
+      const dtUndefined = undefined;
+      const dtSymbol = Symbol("s");
+      const dtObject = { a: 1 };
+      show(
+        "datatypes",
+        `string:${typeof dtString}, number:${typeof dtNumber}, bigint:${typeof dtBigInt}, boolean:${typeof dtBoolean}, null:${dtNull === null ? "null" : typeof dtNull}, undefined:${typeof dtUndefined}, symbol:${typeof dtSymbol}, object:${typeof dtObject}`,
+      );
+
+      // Arrays examples
+      const nums = [1, 2, 3];
+      const mixedArr = [1, "two", true, null];
+      show("array nums", JSON.stringify(nums));
+      show("array mixed", JSON.stringify(mixedArr));
+      show("array access nums[1]", nums[1]);
+      nums.push(4);
+      nums.unshift(0);
+      show("array after push/unshift", JSON.stringify(nums));
+      show(
+        "array methods join/pop",
+        `join:${nums.join("-")}, pop:${nums.pop()}`,
+      );
+
+      // Objects & looping examples
+      const person = { first: "Rajan", last: "Kumar", age: 25 };
+      show("object person", JSON.stringify(person));
+      show("object access person.first", person.first);
+      let objProps = "";
+      for (const key in person) {
+        objProps += `${key}:${person[key]}; `;
+      }
+      show("for...in object props", objProps.trim());
+
+      // Looping examples
+      let sum = 0;
+      for (let i = 0; i < 5; i++) {
+        sum += i;
+      }
+      show("for loop sum 0..4", sum);
+      let forOfSum = 0;
+      for (const n of [1, 2, 3]) {
+        forOfSum += n;
+      }
+      show("for...of sum [1,2,3]", forOfSum);
+      let idx = 0;
+      while (idx < 3) {
+        idx++;
+      }
+      show("while ended at", idx);
+      let j = 0,
+        doCount = 0;
+      do {
+        doCount++;
+        j++;
+      } while (j < 2);
+      show("do...while count", doCount);
+      [1, 2, 3].forEach((v, i) => show(`forEach ${i}`, v));
+      // for...of iterates characters (recommended)
+      let chars = "";
+      for (const ch of "Hi!") {
+        chars += `[${ch}] `;
+      }
+      show("for...of on string (chars)", chars.trim());
+
+      // for...in iterates indices (not commonly used for strings but works)
+      let indices = "";
+      for (const i in "Hi!") {
+        indices += `index ${i} -> '${"Hi!"[i]}'\n`;
+      }
+      show("for...in on string (indices)", indices.trim());
+
+      // Practical example: title-case a sentence
+      function titleCase(sentence) {
+        return sentence
+          .toLowerCase()
+          .split(/\s+/)
+          .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+          .join(" ");
+      }
+      show(
+        'titleCase("learn javaScript basics")',
+        titleCase("learn javaScript basics"),
+      );
+
+      // Practical example: slugify a string
+      function slugify(input) {
+        return input
+          .toLowerCase()
+          .trim()
+          .replace(/[^a-z0-9\s-]/g, "")
+          .replace(/\s+/g, "-")
+          .replace(/-+/g, "-");
+      }
+      show(
+        'slugify("  Hello, World! JS Rocks ")',
+        slugify("  Hello, World! JS Rocks "),
+      );
+
+      // Demonstrate chaining
+      show(
+        "chaining example",
+        "  Example String  ".trim().toLowerCase().slice(0, 7).toUpperCase(),
+      );
+
+      // End note
+      show("done", "All examples logged to page and console.");
+    </script>
+  </body>
+</html>

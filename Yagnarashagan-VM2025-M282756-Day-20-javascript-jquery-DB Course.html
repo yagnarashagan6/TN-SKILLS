@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <main>
+      <h1 id="title">jQuery QuerySelector-style Demo</h1>
+
+      <section id="demo">
+        <p class="intro">
+          Use the buttons below to run selector examples and see results in the
+          console and on the page.
+        </p>
+
+        <ul class="items">
+          <li data-type="fruit">Apple</li>
+          <li data-type="veg">Carrot</li>
+          <li data-type="fruit">Banana</li>
+          <li data-type="veg">Spinach</li>
+        </ul>
+
+        <div class="controls">
+          <button id="show-first">Select first item (querySelector)</button>
+          <button id="show-all-fruits">
+            Select all fruits (querySelectorAll)
+          </button>
+          <button id="toggle-highlight">Toggle highlight on list</button>
+          <button id="add-item">Add item</button>
+        </div>
+
+        <label for="newItem">New item text</label>
+        <input id="newItem" placeholder="e.g. Mango" />
+
+        <div id="log" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      $(function () {
+        // Basic element selector (like document.querySelector)
+        $("#show-first").on("click", function () {
+          const first = $(".items li").first(); // jQuery equivalent of querySelector
+          console.log("first element:", first[0]);
+          $("#log").text("First item: " + first.text());
+          first.css("background", "#fffae6");
+        });
+
+        // querySelectorAll equivalent: select all that match an attribute
+        $("#show-all-fruits").on("click", function () {
+          const fruits = $(".items li").filter('[data-type="fruit"]');
+          console.log("fruits NodeList-equivalent:", fruits.toArray());
+          $("#log").text(
+            "Fruits: " +
+              fruits
+                .map((i, el) => $(el).text())
+                .get()
+                .join(", "),
+          );
+          fruits.css("color", "#0a6");
+        });
+
+        // Toggle a class on the list (demonstrates closest/parents/siblings usage)
+        $("#toggle-highlight").on("click", function () {
+          $(".items").toggleClass("highlight");
+          // find children, parent, and siblings examples
+          const second = $(".items li").eq(1); // like document.querySelectorAll(...)[1]
+          console.log("second item text:", second.text());
+          console.log("parent of list:", $(".items").parent()[0]);
+          console.log("siblings of second item:", second.siblings().toArray());
+        });
+
+        // Add and remove elements (manipulation after selection)
+        $("#add-item").on("click", function () {
+          const txt = $("#newItem").val().trim() || "New";
+          const node = $("<li>").attr("data-type", "fruit").text(txt);
+          $(".items").append(node);
+          console.log("appended:", node[0]);
+          $("#log").text("Appended: " + txt);
+        });
+
+        // Delegate event: like using event.target with closest()
+        $(".items").on("click", "li", function (e) {
+          const clicked = $(this);
+          // closest and find examples
+          const parent = clicked.closest("#demo");
+          console.log("clicked item:", clicked.text());
+          console.log("closest #demo element:", parent[0]);
+          clicked.toggleClass("selected");
+          $("#log").text("Clicked: " + clicked.text());
+        });
+
+        // Useful helpers that mirror querySelector utilities
+        // - .find(selector) => scoped querySelectorAll
+        // - .filter(selector) => filter a collection
+        // - .first(), .last(), .eq(index) => pick by index
+
+        // Small UX: add some minimal styles via JS so file remains standalone
+        $("<style>")
+          .text(
+            `
+          .items { padding-left: 1rem; }
+          .items li { cursor: pointer; padding: 0.15rem 0.3rem; }
+          .items li.selected { outline: 2px solid #2b6; }
+          .highlight li { background: #f0f8ff; }
+          #log { margin-top: 1rem; font-weight: 600; }
+        `,
+          )
+          .appendTo("head");
+      });
+    </script>
+  </body>
+</html>
